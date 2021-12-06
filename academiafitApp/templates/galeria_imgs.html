@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- Main Start -->
+    <main>
+		<!-- Fotos da Galeria -->
+		<section class="container my-4">    
+			<h1 class="text-center mb-4 section-heading border-bottom pb-2">{{galeria.titulo}} - Fotos</h1>
+			<div class="row">
+				{% for gimg in galeria_imgs %}
+				<div class="col-md-4 mb-4">
+					<div class="card">
+					  <a href="{{gimg.img.url}}" data-lightbox="lightbox">
+					  <img src="{{gimg.img.url}}" class="card-img-top" alt="{{gimg.descricao}}">
+					  </a>
+                      <p align="center">{{gimg.descricao}}</p>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</section>
+		<!-- End -->
+    </main>
+    <!-- End -->
+{% endblock %}

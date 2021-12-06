@@ -1,0 +1,11 @@
+<div class="list-group">
+	{% if user.current_plan == true and mytrainer.trainer == true %}
+		<a href="{% url 'user_dashboard' %}" {% if request.path == '/user-dashboard' %} active {% endif %}class="list-group-item">Dashboard</a>
+	{% endif %}
+	<a href="{% url 'update_profile' %}" class="list-group-item {% if request.path == '/update-profile' %} active {% endif %}">Perfil</a>
+	<a href="{% url 'password_change' %}" class="list-group-item {% if request.path == '/accounts/password_change/' %} active {% endif %}">Alterar senha</a>
+	<a href="{% url 'notifs' %}" class="list-group-item {% if request.path == '/notifs' %} active {% endif %}">Notificações <span class="float-end badge bg-info mt-1">{{total_unread}}</span></a>
+	{% if user.current_plan == true %}
+	<a href="{% url 'report_for_trainer' %}" class="list-group-item {% if request.path == '/report_for_trainer' %} active {% endif %}">Relatório do Treinador</a>
+	{% endif %}
+</div> 

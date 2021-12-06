@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% if not request.user.is_authenticated %}
+    <!-- Login Start -->
+    <main>
+		<section class="container my-4">
+			<h1 class="text-center mb-4 section-heading border-bottom pb-2">Registro</h1>
+			<div class="row">
+				<div class="col-md-6 offset-3">
+					{% if msg %}
+					<p class="text-success">{{msg}}</p>
+					{% endif %}
+					<form method="post" action="">
+						{% csrf_token %}
+						<table class="table table-bordered">
+							{{form.as_table}}
+							<tr>
+								<td colspan="2">
+									<input type="submit" class="btn btn-primary"/>
+								</td>
+							</tr>
+						</table>
+					</form>
+					<p>Novo por aqui? <a href="#">Clique aqui</a></p>
+				</div>
+			</div>
+		</section>
+		<!-- End -->
+    </main>
+    <!-- End -->
+{% else %}
+<div class="card-body">
+<div style="text-align:center"><br><h2>Você já está logado.</h2>
+<h3>Encerre a sessão para abrir uma nova.</h3><br></div>
+</div>
+
+{% endif %}
+{% endblock %}

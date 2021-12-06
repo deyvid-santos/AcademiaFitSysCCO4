@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+ <!-- Inicio do Main -->
+    <main>
+		<!-- Galeria -->
+		<section class="container my-4">
+			<h1 class="text-center mb-4 section-heading border-bottom pb-2">Galeria</h1>
+			<div class="row">
+				{% for galeria in galeria %}
+				<div class="col-md-4 mb-4">
+					<div class="card">
+					  <img src="{{galeria.img.url}}" class="card-img-top" alt="{{galeria.title}}">
+					  <div class="card-body">
+					    <h5 class="card-title">{{galeria.titulo}}</h5>
+					    <p class="card-text">{{galeria.descricao|safe}}</p>
+					    <a href="{% url 'galeria_foto' galeria.id %}" class="btn btn-primary">Mostrar Tudo</a>
+					  </div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</section>
+		<!-- Fim Galeria -->
+    </main>
+    <!-- Fim Main -->
+{% endblock %}

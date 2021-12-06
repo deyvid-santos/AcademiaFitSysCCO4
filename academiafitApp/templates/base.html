@@ -1,0 +1,123 @@
+<!-- Isso é um template para criação das minhas páginas -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <title>Academia FIT</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'bootstrap-icons/bootstrap-icons.css' %}">
+	
+	<!-- jquery -->
+	<script src="{% static 'jquery/jquery-3.6.0.min.js' %}"></script>
+	
+	<style type="text/css">
+
+	footer {
+  	position: bottom;
+  	bottom: 0;
+	width: 100%;
+	height: 50px;
+	}
+
+	.carousel-control-prev-icon, .carousel-control-next-icon {
+    height: 100px;
+    width: 100px;
+    outline: black;
+    background-color: rgba(0, 0, 0, 0.3);
+    background-size: 100%, 100%;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+	.carousel{
+  color: #000000;
+  background-color: #000000 !important;
+
+}
+.carousel .item{
+  color: #000000;
+  background-color: #000000;
+  opacity.
+}
+
+
+	</style>
+</head>
+<body>
+
+<!-- Inicio do Header -->
+ <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-danger navbar-fixed-top">
+	  <div class="container">
+	    <a class="navbar-brand" href="{% url 'home' %}" >{{logo}}</a>
+	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	    </button>
+	    <div class="collapse navbar-collapse" id="navbarNav">
+	      <ul class="navbar-nav ms-auto">
+	        <li class="nav-item">
+	          <a class="nav-link" aria-current="page" href="/.">Home</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" aria-current="page" href="{% url 'galeria' %}">Galeria</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="{% url 'pricing' %}">Preço</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link btn btn-sm btn-dark text-white" href="{% url 'formulario' %}">Formulário</a>
+	        </li>
+	        <li class="nav-item dropdown">
+	          <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	            Minha Conta
+	          </a>
+	          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+	          	{% if not request.user.is_authenticated %}
+		            {% if request.session.trainerLogin %}
+					<li><a class="dropdown-item" href="{% url 'trainer_dashboard' %}">Dashboard</a></li>
+		            <li><a class="dropdown-item" href="{% url 'trainerlogout' %}">Logout</a></li>
+		            {% else %}
+		            <li><a class="dropdown-item" href="{% url 'trainerlogin' %}">Treinador</a></li>
+		            <li><a class="dropdown-item" href="{% url 'signup' %}">Registro</a></li>
+		            <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+		            {% endif %}
+	            {% else %}
+				{% if user.current_plan %}
+	            <li><a class="dropdown-item" href="{% url 'user_dashboard' %}">Dashboard</a></li>
+				{% endif %}
+	            <li><a class="dropdown-item" href="{% url 'update_profile' %}">Perfil</a></li>
+	            <li><a class="dropdown-item" href="#">Configurações</a></li>
+	            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+	            {% endif %}
+	          </ul>
+	        </li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+{% block content %}
+{% endblock %}
+<!-- Footer-->
+<div id="container">
+<footer id="footer" class="container py-3">
+	<center>
+    <p class="float-end"><a href="#">Topo</a></p>
+    <p>{{footer.descricao}} -
+        <a href="{% url 'paginadesc' 1 %}">Privacidade</a> ·
+        <a href="{% url 'paginadesc' 2 %}">Termos</a> .
+        <a href="{% url 'faq' %}">FAQ</a> .
+        <a href="{% url 'paginadesc' 3 %}">Contato</a> .
+    </p>
+	</center>
+</footer>
+
+<!-- JS -->
+<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- LightBox css -->
+<link rel="stylesheet" type="text/css" href="{% static 'lightbox/dist/css/lightbox.css' %}" />
+<!-- LightBox Js -->
+<script type="text/javascript" src="{% static 'lightbox/dist/js/lightbox.js' %}"></script>
+</body>
+</html>

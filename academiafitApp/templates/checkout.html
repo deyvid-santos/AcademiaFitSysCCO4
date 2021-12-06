@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main>
+		<!-- Services -->
+		<section class="container my-4">
+			<h1 class="text-center mb-4 section-heading border-bottom pb-2">Checkout</h1>
+				<table class="table table-bordered">
+					<thead class="table-warning">
+						<tr>
+							<th>Plano</th>
+							<th>Descrição</th>
+							<th>Pagamento por</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<table class="table-bordered table">
+									<tr>
+										<th>Nome</th>
+										<td>{{plan.title}}</td>
+									</tr>
+									<tr>
+										<th>Preço</th>
+										<td>${{plan.price}}</td>
+								</table>
+							</td>
+							<td>
+								<ul class="list-unstyled">
+				              	{% for feature in plan.subplanfeature_set.all %}
+						            <li>* {{feature.title}}</li>
+				            	{% endfor %}
+					            </ul>
+							</td>
+						</tr>
+					</tbody>
+					<tfoot class="table-info">
+						<tr>
+							<td></td>
+							<th>Total:</th>
+							<td><b>R$<span class="totalAmount">{{plan.price}}</span></b></td>
+						</tr>
+						<tr>
+							<td colspan="2"></td>
+							<td>
+								<form method="post" action="{% url 'checkout_session' plan.id %}">
+									{% csrf_token %}
+									<input type="submit" value="Pagar" class="btn btn-primary" />
+								</form>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+		</section>
+		<!-- End -->
+    </main>
+
+
+<!-- Desconto -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".select-validity").on('click',function(){
+			var _planPrice=$(this).attr('data-planprice');
+			var _planValid=$(this).val();
+			var _planDisc=$(this).attr('data-discount');
+			var _totalPrice=_planPrice*_planValid;
+			if(_planDisc>0){
+				var _calDisc=_totalPrice*_planDisc/100;
+				_calDisc=_totalPrice-_calDisc;
+			}else{
+				_calDisc=_planPrice;
+			}
+			$(".totalAmount").text(_calDisc);
+		});
+	});
+</script>
+
+{% endblock %}

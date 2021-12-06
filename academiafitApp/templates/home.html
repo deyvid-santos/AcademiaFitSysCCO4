@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Inicio do Main -->
+    <main>
+    	<!-- banner Start -->
+    	<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+		  <div class="carousel-inner">
+			{% for banner in banners %}
+		    <div class="carousel-item {% if forloop.counter == 1 %} active {% endif %}">
+		      <img src="{{banner.img.url}}" class="rounded mx-auto d-block" width="1150" height="563" alt="Slide 1">
+		    </div>
+		    {% endfor %}
+		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		    <span class="visually-hidden">Anterior</span>
+		  </button>
+		  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		    <span class="visually-hidden">Seguinte</span>
+		  </button>
+		</div>
+		<div class="carousel-caption d-none d-md-block">
+			<h4>Bem-vindo ao nosso site</h4>
+			<p>Deslize para baixo para checar o que temos para lhe oferecer!</p>
+		  </div>
+		</div>
+		<!-- End Banner -->
+		<!-- Servicos -->
+		<section class="container my-4">
+			<h1 class="text-center mb-4 section-heading">Serviços</h1>
+			<div class="row">
+				{% for servico in servicos %}
+				<div class="col-md-4">
+					<div class="card">
+					  <img src="{{servico.img.url}}" class="card-img-top" alt="...">
+					  <div class="card-body">
+					    <h3 class="card-title">{{servico.titulo}}</h3>
+					    <p class="card-text">{{servico.descricao|safe}}</p>
+					    <a href="{% url 'servicopagina' servico.id %}" class="btn btn-primary">Saiba mais</a>
+					  </div>
+					</div>
+				</div>
+				{% endfor %}
+		</section>
+		<!-- End -->
+
+		<!-- Testimonials -->
+		<section class="container-fluid bg-light py-4 mt-5 border-top border-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-5">
+							<h1 class="mb-4 section-heading text-dark">Sobre Nós</h1>
+							<p class="lh-base">Saiba tudo sobre nós, nossa história e nosso foco principal, clique abaixo para saber mais!</p>
+							<p><a href="{% url 'paginadesc' 4 %}" class="btn btn-primary text-white">Saiba mais</a></p>
+					</div>
+					<div class="col-md-6 offset-1">
+						<h1 class="mb-4 section-heading">Galeria <a href="./galeria" class="float-end btn btn-primary text-white mt-2">Ver tudo</a></h1>
+						<div class="gallery">
+							{% for gimg in gimgs %}
+							<a href="{{gimg.img.url}}" data-lightbox="galeria"><img src="{{gimg.img.url}}" width="155" class="img-thumbnail" alt="{{gimg.alt_text}}"></a>
+							{% endfor %}
+						</div>
+				</div>
+				</div>
+			</div>
+		</section>
+		<!-- End Testimonials -->
+		<br><br>
+    </main>
+    <!-- End -->
+
+{% endblock %}

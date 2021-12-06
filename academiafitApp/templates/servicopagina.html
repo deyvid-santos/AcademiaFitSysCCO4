@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<main>
+<section class="container my-4">
+			<h1 class="text-center mb-4 section-heading">{{servico.titulo}}</h1>
+			<p>{{servico.body|safe}}</p>
+		</section>
+</main>
+
+{% endblock %}
